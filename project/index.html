@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="layout.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="top"><img src="img/logo-chaordic.png" /></div>
+<div id="shortner">
+	<h1>Encurte seus links</h1>
+	<p>Links são longos. Encurte os links que você deseja compartilhar, e acompanhe enquanto viajam através da internet.</p>
+	<form>
+	<input type="text" id="longLink" placeholder="Cole o seu link aqui" />
+	<img id="resetBtt" src="img/close-button.png" />
+	<input type="button" id="getShort" value="ENCURTAR" />
+	</form>
+</div>
+<div id="list"><h2>TOP 5</h2></div>
+<div id="hits">
+	<h2>HITS</h2>
+	<div id="totalhits"></div>
+	<p>Cliques em links</p>
+</div>
+<div id="bottom">
+	<h5>chr.dc</h5>
+	<img src="img/icon-twitter.png">
+	<img src="img/icon-facebook.png">
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){	//on doc load
+	$.getJSON("urls.json", function(sites){	//load json file
+		//count total hits
+		var totalHits = 0;
+		$.each(sites, function(i){
+			totalHits += sites[i].hits;
+		});
+		$("#totalhits").append("<h2 id='hitbox'>" + totalHits + "</h2>");	//append hits count to hitsbox
+		//sort top5
+		var top5 = [];
+		var max = 0;
+		for (count = 0; count < 5; count++){
+			max = 0;
+			$.each(sites, function(i){
+				if (sites[i].hits > max && !top5.includes(i)){
+					top5[count] = i;
+					max = sites[i].hits;
+				}
+			});
+		}
+		//list top5
+		for (i = 0; i < 5; i++){
+			$("#list").append("<h5>" + sites[top5[i]].shortUrl + "</h5>" + "<p>" + sites[top5[i]].hits + "</p>");
+			if (i != top5.length-1){$("#list").append("<hr>");}
+		}
+		//manage form
+        $('#getShort').click(function(){
+			if ($(this).attr("value") == "ENCURTAR"){
+				$(this).attr("value", "COPIAR");
+				$('#resetBtt').show();
+				if (!sites.find(function(item, i){
+					if(item.url === $('#longLink').val()){
+						return $('#longLink').val(sites[i].shortUrl);
+					}
+				})){return $('#longLink').val("URL desconhecida");}
+			}
+			else{
+				document.querySelector('#longLink').select();
+				document.execCommand('copy');
+			}
+        });
+		$('#resetBtt').click(function(){
+			$(this).hide();
+			$('#longLink').val("");
+			$('#getShort').attr("value", "ENCURTAR");
+		});
+	});
+	//prevent enter key
+	$(window).keydown(function(event){
+		if(event.keyCode == 13) {
+			event.preventDefault();
+			return false;
+		}
+	});
+});
+</script>
+
+</body>
+</html>

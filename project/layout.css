@@ -1,0 +1,99 @@
+body {
+	text-align: center;
+	font-family: "Roboto";
+	margin: 0 auto;
+}
+h1, h2 {
+	font-family: "Roboto Slab";
+}
+
+h2, h5 {
+	text-align: center;
+	color: #AA1423;
+}
+h5 {
+	line-height: 0;
+}
+
+p {
+	font-size: 12px;
+	color: #777;
+}
+#top {
+	margin-top: 25px;
+}
+#shortner {
+	color: white;
+	padding: 20% 0 20% 0;
+	background-image: url("img/background-home.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+#shortner > p {
+	margin: 0 15% 20px 15%;
+	color: white;
+}
+input[type=text] {
+	border: none;
+	color: orange;
+	border-bottom: 2px solid;
+	background: none;
+}
+input[type=text]::placeholder {
+	color: orange;
+	font-size: 10px;
+}
+input[type=button] {
+	background-color: orange;
+	border: none;
+	color: white;
+	padding: 8px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+#resetBtt {
+	height: 20px;
+    width: 20px;
+	cursor: pointer;
+	display:none;
+}
+#list {
+	margin: 0 0 50px 0;
+	display: inline-block;
+	min-width: 50%;
+	text-align: left;
+    vertical-align: middle;
+}
+#list > h5 {
+	display: inline-block;
+	line-height: 0;
+}
+#list > p {
+	float: right;
+}
+#hits {
+	background-color: #EEE;
+	padding: 5% 0 5% 0;
+}
+#hitbox {
+	background-color: white;
+	border: 1px solid #777;
+	display: inline-block;
+	padding: 5px;
+	border-radius: 3px;
+}
+#bottom {
+	margin: 0 25px 0 25px;
+	padding: 10px;
+}
+#bottom > h5 {
+	display: inline;
+	float: left;
+}
+#bottom > img {
+	display: inline;
+	float: right;
+	padding-top: 10px;
+}
